@@ -52,13 +52,5 @@ In case of the apocalypse, both nexus and gogs have persistent storage, so stopp
 To stop all 3 containers, run:
 stop: docker-compose down
 
-Q&A:
-
 TODO:
-- jos dokumentacije
 - terraform / cloudformation ?
-- specificnosti instalacije
-- sve na github-u
-- hostanme umesto IP-a
-
--terraform sa lokalnim dokerom
