@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+  jenkins:
+    container_name: neo_jenkins
+    hostname: jenkins1
+    image: 'jenkins/jenkins:lts'
+    privileged: true
+    user: root
+    ports:
+      - '8080:8080'
+    healthcheck:
+      test: ["CMD", "curl", "-s", "-f", "http://localhost:8080/login"]
+    volumes:
+      - ~/jenkins:/var/jenkins_home
+    networks:
+     - local
+
+  nexus:
+    container_name: neo_nexus
+    hostname: nexus1
+    image: 'sonatype/nexus3:3.30.1'
+    ports:
+      - '8081:8081'
+    volumes:
+      - "./nexus:/nexus-data"
+    healthcheck:
+      test: ["CMD", "curl", "-s", "-f", "http://localhost:8081/"]
+    networks:
+      - local
+    links:
+      - jenkins
+
+  gogs:
+    container_name: neo_gogs
+    image: "gogs/gogs:0.12.3"
+    hostname: gogs1
+    ports:
+      - '10022:22'
+      - '3000:3000'
+    volumes:
+      - 'gogs_data:/data'
+    networks:
+      - local
+
+volumes:
+  nexus-data: {}
+  jenkins_data:
+    driver: local
+  gogs_data:
+    driver: local
+
+networks:
+  local:
+    driver: bridge
