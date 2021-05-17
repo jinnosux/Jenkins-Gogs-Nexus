@@ -1,4 +1,4 @@
-## Jenkins + Sonatype Nexus + Gogs stack
+## Jenkins + Sonatype Nexus + Gogs stack in Docker
 This is a CI/CD Stack for Java Apps. It uses Jenkins LTS version for pipeline, Gogs as a self hosted GIT service, and Sonatype Nexus Repository Manager for artifacts.
 
 To Start, run in terminal (inside the directory where docker-compose.yml is located):
