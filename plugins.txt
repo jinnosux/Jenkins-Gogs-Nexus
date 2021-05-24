@@ -1,0 +1,14 @@
+credentials
+docker
+external-monitor-job
+git-client
+git-server
+git
+pam-auth
+scm-api
+pipeline-stage-view
+config-file-provider
+gogs-webhook
+maven-plugin
+pipeline-maven
+pipeline-stage-step
