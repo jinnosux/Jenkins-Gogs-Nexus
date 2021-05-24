@@ -11,8 +11,7 @@ Than, set up accounts for all 3 services :
 
  - Gogs : http://localhost:3000 - Create new account
 
- - Jenkins : http://localhost:8080 - For admin password, execute :
-     - `docker exec neo_jenkins cat /var/jenkins_home/secrets/initialAdminPassword`
+ - Jenkins : http://localhost:8080 - Default user/pass is created, check in "Dockerfile"
 
  - Nexus : http://localhost:8081 - Create new account (you will need it for settings.xml later)
 
@@ -28,11 +27,6 @@ Now that your stack is up and ready, you can connect your Java app to Nexus repo
   </distributionManagement>
 </project>
 ```
-Than, you should install those plugins in Jenkins :
-
- - https://plugins.jenkins.io/gogs-webhook/ - Gogs webhook tutorial is on this page as well
- - https://plugins.jenkins.io/pipeline-maven/ - to use maven build/deploy inside a pipeline code
- - https://plugins.jenkins.io/config-file-provider/ - to provide settings.xml for nexus auth
 
 Last step is adding Maven Tool and Global Settings; Go to Jenkins Homepage > Manage Jenkins > Global Tool Configuration > Maven Installations at the bottom. Name should be "maven" and Installer from Apache. Next, go to Homepage > Manage Jenkins > Manage Files > Add A New Config, where ID should be "nexus-snapshots", and add username and password of your nexus instance at the bottom of "content", above the </settings> line, like this:
 ```
@@ -59,4 +53,6 @@ To stop all 3 containers, run:
 stop: docker-compose down
 
 TODO:
+- ~~dockerfile for jenkins plugins~~
+- ~~jenkins init setup disable, default user/pass~~
 - terraform / cloudformation ?
