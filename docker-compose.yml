@@ -68,7 +68,6 @@ services:
       - "./sonarqube_extensions:/opt/sonarqube/extensions"
       - "./sonarqube_logs:/opt/sonarqube/logs"
       - "./sonarqube_temp:/opt/sonarqube/temp"
-      - "./sonarqube_shared:/opt/sonarqube/temp/sharedmemory"
     networks:
       - local
 
@@ -95,7 +94,6 @@ volumes:
   sonarqube_extensions:
   sonarqube_logs:
   sonarqube_temp:
-  sonarqube_shared:
   postgresql:
   postgresql_data:
 
