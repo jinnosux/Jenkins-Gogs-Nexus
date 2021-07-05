@@ -47,6 +47,7 @@ services:
       - local
 
   postgres:
+    hostname: postgres
     image: postgres
     container_name: postgres
     environment:
@@ -59,6 +60,7 @@ services:
       - local
 
   sonarqube:
+    hostname: sonarqube
     image: sonarqube
     container_name: sonarqube
     ports:
@@ -66,7 +68,7 @@ services:
     depends_on:
       - postgres
     environment:
-      SONAR_JDBC_URL: jdbc:postgresql://postgres:${DB_PORT}/${DB_NAME}
+      SONAR_JDBC_URL: jdbc:postgresql://postgres:5432/sonar
       SONAR_JDBC_USERNAME: ${DB_USER}
       SONAR_JDBC_PASSWORD: ${DB_PASSWORD}
     ulimits:
