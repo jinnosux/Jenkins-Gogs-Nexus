@@ -15,7 +15,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-s", "-f", "http://localhost:8080/login"]
     volumes:
-      - ~/jenkins:/var/jenkins_home
+      - "./jenkins:/var/jenkins_home"
     networks:
      - local
 
@@ -64,10 +64,10 @@ services:
         soft: 262144
         hard: 262144
     volumes:
-      - sonarqube_data:/opt/sonarqube/data
-      - sonarqube_extensions:/opt/sonarqube/extensions
-      - sonarqube_logs:/opt/sonarqube/logs
-      - sonarqube_temp:/opt/sonarqube/temp
+      - "./sonarqube_data:/opt/sonarqube/data"
+      - "./sonarqube_extensions:/opt/sonarqube/extensions"
+      - "./sonarqube_logs:/opt/sonarqube/logs"
+      - "./sonarqube_temp:/opt/sonarqube/temp"
     networks:
       - local
 
