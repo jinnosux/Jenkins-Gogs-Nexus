@@ -15,7 +15,7 @@ services:
     healthcheck:
       test: ["CMD", "curl", "-s", "-f", "http://localhost:8080/login"]
     volumes:
-      - "./jenkins:/var/jenkins_home"
+      - "jenkins_data:/var/jenkins_home"
     networks:
      - local
 
@@ -48,17 +48,19 @@ services:
 
   sonarqube:
     hostname: sonarqube
-    image: sonarqube:8.2-community
+    image: sonarqube
     container_name: sonarqube
+    expose:
+      - 9000
     ports:
       - 9000:9000
     user: "999"
     depends_on:
       - db
     environment:
-      - sonar.jdbc.username=sonardb
-      - sonar.jdbc.password=sonardb
-      - sonar.jdbc.url=jdbc:postgresql://db/sonar
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.password=sonar
+      - sonar.jdbc.url=jdbc:postgresql://db:5432/sonar
       - sonar.search.javaAdditionalOpts=-Dbootstrap.system_call_filter=false
     ulimits:
       nofile:
@@ -72,12 +74,13 @@ services:
       - local
 
   db:
-    hostname: postgres
-    image: postgres:12.0
+    hostname: db
+    image: postgres
     container_name: postgres
     environment:
-      POSTGRES_USER: nexusdb
-      POSTGRES_PASSWORD: nexusdb
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
     volumes:
       - postgresql:/var/lib/postgresql
       - postgresql_data:/var/lib/postgresql/data
